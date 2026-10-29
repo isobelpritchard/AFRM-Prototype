@@ -38,3 +38,20 @@ def test_zero_fuel_flow_rejected():
 def test_non_numeric_rejected():
     _, errors = validate_inputs({**VALID, "fuel_flow_kg_h": "abc"})
     assert "fuel_flow_kg_h" in errors
+
+def test_negative_distance_rejected():
+    inputs, errors = validate_inputs({**VALID, "route_distance_km": "-10"})
+    assert inputs is None and "route_distance_km" in errors
+
+
+def test_negative_groundspeed_rejected():
+    _, errors = validate_inputs({**VALID, "groundspeed_kmh": "-250"})
+    assert "groundspeed_kmh" in errors
+
+
+def test_multiple_errors_reported_together():
+    inputs, errors = validate_inputs(
+        {**VALID, "groundspeed_kmh": "0", "fuel_flow_kg_h": "0"}
+    )
+    assert inputs is None
+    assert set(errors) == {"groundspeed_kmh", "fuel_flow_kg_h"}
