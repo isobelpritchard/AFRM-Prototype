@@ -27,3 +27,7 @@ def endpoint_fuel_kg(i: FlightInputs) -> float:
 def margin_kg(i: FlightInputs) -> float:
     """Positive = above threshold, negative = below threshold."""
     return endpoint_fuel_kg(i) - i.reserve_threshold_kg
+
+def fuel_use_difference_kg(i: FlightInputs) -> float:
+    """Positive = more fuel used than planned, negative = less."""
+    return i.actual_fuel_kg - i.planned_fuel_kg

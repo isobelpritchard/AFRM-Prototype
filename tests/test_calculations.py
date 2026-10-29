@@ -47,3 +47,16 @@ def test_negative_endpoint_fuel():
     case = replace(EXAMPLE, current_fuel_kg=300)
     assert calc.endpoint_fuel_kg(case) == pytest.approx(-100)
     assert calc.margin_kg(case) == pytest.approx(-300)    
+
+def test_fuel_use_more_than_planned():
+    assert calc.fuel_use_difference_kg(EXAMPLE) == pytest.approx(20)
+
+
+def test_fuel_use_equal_to_planned():
+    case = replace(EXAMPLE, actual_fuel_kg=80)
+    assert calc.fuel_use_difference_kg(case) == 0
+
+
+def test_fuel_use_less_than_planned():
+    case = replace(EXAMPLE, actual_fuel_kg=60)
+    assert calc.fuel_use_difference_kg(case) == pytest.approx(-20)
