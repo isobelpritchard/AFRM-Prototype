@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-The Aircraft Fuel and Range Management (AFRM) Prototype is a command-line application that takes simulated flight and fuel data, checks it, and calculates the fuel and range figures a crew would use to decide whether a route can be completed. It then compares the predicted fuel at the route endpoint against a project-defined reserve threshold and reports one of three outcomes:
+The Aircraft Fuel and Range Management (AFRM) Prototype is a command-line application that takes simulated flight and fuel data, checks it, and calculates the fuel and range figures. It then compares the predicted fuel at the route endpoint against a project-defined reserve threshold and reports one of three outcomes:
 
 - **Meets simulated criteria**
 - **Below simulated threshold**
@@ -23,24 +23,31 @@ The AFRM Prototype uses simulated flight and fuel data and is not intended for o
 
 - Windows 11
 - Visual Studio Code 1.143.1
-- Python 3.11.9
-- Git 2.47.1.windows.2 for version control
+- `Python 3.11.9`
+- `Git 2.47.1.windows.2` for version control
 
 ## Dependencies
 
 - The program itself uses the Python standard library only.
-- `pytest` is required to run the tests.
+- `pytest 9.2.0` is required to run the tests.
 
 ## Setup
 
-1. Clone or download the repository and open the `AFRM Prototype` folder in a terminal.
-2. Create and activate a virtual environment:
+1. Clone or download the repository and open the `AFRM Prototype` folder in PowerShell or the VS Code terminal.
+2. Create a virtual environment:
    ```powershell
    python -m venv .venv
-   .venv\Scripts\Activate.ps1
    ```
-   If PowerShell blocks the activation script, run `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` once and try again.
-3. Install the test dependency:
+3. Activate the virtual environment:
+   ```powershell
+   .\.venv\Scripts\Activate.ps1
+   ```
+   If PowerShell blocks the activation script, allow scripts for this terminal session only:
+   ```powershell
+   Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+   ```
+   Then run the activation script again
+4. Install the test dependency:
    ```powershell
    python -m pip install pytest
    ```
@@ -132,6 +139,6 @@ An endpoint fuel exactly equal to the threshold meets the criteria. An endpoint 
 - Fuel flow and groundspeed are constant for the whole route.
 - The 200 kg reserve threshold is a simulated value equal to one hour of flight at the example fuel flow of 200 kg/h. It is not taken from real regulations.
 - Fuel flow and groundspeed must be greater than zero, because they are divisors in the calculations.
-- Planned and actual fuel use are measured over the same interval.
+- Planned and actual fuel use are measured over the same simulated 0.5-hour interval.
 - If the threshold is above the current fuel, endurance to the threshold and the range are reported as 0 rather than negative values.
 - Any invalid input stops all dependent calculations, so no misleading predictions are displayed.
