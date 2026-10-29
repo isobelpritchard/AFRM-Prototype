@@ -1,4 +1,4 @@
-from src.models import FlightInputs
+from models import FlightInputs
 
 
 def total_endurance_h(i: FlightInputs) -> float:

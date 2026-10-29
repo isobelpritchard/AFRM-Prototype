@@ -1,7 +1,7 @@
 from enum import Enum
 
-from src.models import FlightInputs
-from src import calculations as calc
+from models import FlightInputs
+import calculations as calc
 
 
 class FuelStatus(Enum):

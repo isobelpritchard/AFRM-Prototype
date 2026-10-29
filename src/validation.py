@@ -1,5 +1,5 @@
 import math
-from src.models import FlightInputs
+from models import FlightInputs
 
 # field name -> (label, unit, must_be_greater_than_zero)
 FIELDS = {
