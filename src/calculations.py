@@ -6,7 +6,7 @@ def total_endurance_h(i: FlightInputs) -> float:
 
 
 def endurance_to_threshold_h(i: FlightInputs) -> float:
-    return (i.current_fuel_kg - i.reserve_threshold_kg) / i.fuel_flow_kg_h
+    return max(0.0, (i.current_fuel_kg - i.reserve_threshold_kg) / i.fuel_flow_kg_h)
 
 
 def range_preserving_threshold_km(i: FlightInputs) -> float:

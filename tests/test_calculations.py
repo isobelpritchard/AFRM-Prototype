@@ -1,5 +1,5 @@
-from src.models import FlightInputs
-from src import calculations as calc
+from models import FlightInputs
+import calculations as calc
 import pytest
 from dataclasses import replace
 
@@ -60,3 +60,9 @@ def test_fuel_use_equal_to_planned():
 def test_fuel_use_less_than_planned():
     case = replace(EXAMPLE, actual_fuel_kg=60)
     assert calc.fuel_use_difference_kg(case) == pytest.approx(-20)
+
+def test_threshold_above_fuel_gives_zero_endurance_and_range():
+    """Design decision: endurance and range never go negative."""
+    case = replace(EXAMPLE, reserve_threshold_kg=1500)
+    assert calc.endurance_to_threshold_h(case) == 0
+    assert calc.range_preserving_threshold_km(case) == 0

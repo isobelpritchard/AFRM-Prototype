@@ -5,7 +5,7 @@ import pytest
 
 import main as app
 import ui
-from src.models import FlightInputs
+from models import FlightInputs
 
 EXAMPLE = FlightInputs(1200, 200, 250, 500, 80, 100, 200)
 
