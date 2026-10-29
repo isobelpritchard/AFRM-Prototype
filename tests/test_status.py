@@ -1,7 +1,7 @@
 from dataclasses import replace
 
-from src.models import FlightInputs
-from src.status import FuelStatus, assess_status
+from models import FlightInputs
+from status import FuelStatus, assess_status
 
 # endpoint fuel = 1200 - 400 = 800 kg, threshold 200 kg
 EXAMPLE = FlightInputs(1200, 200, 250, 500, 80, 100, 200)

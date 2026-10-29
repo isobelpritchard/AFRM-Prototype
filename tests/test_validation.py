@@ -1,4 +1,4 @@
-from src.validation import validate_inputs
+from validation import validate_inputs
 
 VALID = {
     "current_fuel_kg": "1200", "fuel_flow_kg_h": "200",
