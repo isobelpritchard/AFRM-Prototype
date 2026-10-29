@@ -55,13 +55,15 @@ python src/main.py
 
 The program prompts for seven values, each shown with its unit:
 
-Current usable fuel: kg
-Fuel flow: kg/h
-Groundspeed: km/h
-Remaining route distance: km
-Planned fuel use: kg
-Actual fuel used: kg
-Reserve threshold: kg
+| Input                    | Unit |
+| ------------------------ | ---- |
+| Current usable fuel      | kg   |
+| Fuel flow                | kg/h |
+| Groundspeed              | km/h |
+| Remaining route distance | km   |
+| Planned fuel use         | kg   |
+| Actual fuel used         | kg   |
+| Reserve threshold        | kg   |
 
 If any value is missing, non-numeric, negative, or zero where zero is not allowed (fuel flow and groundspeed), the program lists the problems and asks again for only the invalid fields. Results are displayed only once all inputs are valid.
 
@@ -79,22 +81,26 @@ For a list of every test by name:
 python -m pytest -v
 ```
 
-`test_validation.py` R01 and the validation part of R06: valid dataset, missing, non-numeric, negative, and zero-value inputs
-`test_calculations.py` R02, R03, R04: endurance, range, endpoint fuel, margin, and fuel-use difference, including boundary and negative cases
-`test_status.py` R06: each status outcome and the boundaries at 0 kg and at the threshold
-`test_ui.py` R05: displayed values, units, status, and validation messages
+| Test file              | Covers                                                                                                                 |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `test_validation.py`   | R01 and the validation part of R06: valid dataset, missing, non-numeric, negative, and zero-value inputs               |
+| `test_calculations.py` | R02, R03, R04: endurance, range, endpoint fuel, margin, and fuel-use difference, including boundary and negative cases |
+| `test_status.py`       | R06: each status outcome and the boundaries at 0 kg and at the threshold                                               |
+| `test_ui.py`           | R05: displayed values, units, status, and validation messages                                                          |
 
 ## Example Data and Assumptions
 
 ### Example dataset
 
-Current usable fuel: 1200 kg
-Fuel flow: 200 kg/h
-Groundspeed: 250 km/h
-Remaining route distance: 500 km
-Planned fuel use: 80 kg
-Actual fuel used: 100 kg
-Reserve threshold: 200 kg
+| Input                    | Value    |
+| ------------------------ | -------- |
+| Current usable fuel      | 1200 kg  |
+| Fuel flow                | 200 kg/h |
+| Groundspeed              | 250 km/h |
+| Remaining route distance | 500 km   |
+| Planned fuel use         | 80 kg    |
+| Actual fuel used         | 100 kg   |
+| Reserve threshold        | 200 kg   |
 
 ### Expected results
 
@@ -112,9 +118,11 @@ Reserve threshold: 200 kg
 
 ### Status logic
 
-Predicted endpoint fuel < 0 kg: Insufficient fuel to reach endpoint under the model
-0 kg <= endpoint fuel < threshold: Below simulated threshold
-Endpoint fuel >= threshold: Meets simulated criteria
+| Condition                         | Status                                              |
+| --------------------------------- | --------------------------------------------------- |
+| Predicted endpoint fuel < 0 kg    | Insufficient fuel to reach endpoint under the model |
+| 0 kg <= endpoint fuel < threshold | Below simulated threshold                           |
+| Endpoint fuel >= threshold        | Meets simulated criteria                            |
 
 An endpoint fuel exactly equal to the threshold meets the criteria. An endpoint fuel of exactly 0 kg with a positive threshold is reported as below the threshold, not insufficient, because the model does not predict running out of fuel before the endpoint.
 
